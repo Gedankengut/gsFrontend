@@ -32,4 +32,6 @@
 
 3. Configure your gsFrontend installation by editing "/app/inc.cfg.php"
 
-4. Finished
+4. Make sure your webserver can write to "/app/templates_c" (chmod 777 templates_c)
+
+5. Finished
