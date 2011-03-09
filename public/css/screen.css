@@ -1,0 +1,94 @@
+/*
+ * gsFrontend
+ * Copyright (C) 2011 Gedankengut GbR Häuser & Sirin <support@gsales.de>
+ * 
+ * This file is part of gsFrontend.
+ * 
+ * gsFrontend is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * gsFrontend is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with gsFrontend. If not, see <http://www.gnu.org/licenses/>.
+ */
+.clearfix:after 	{ content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix 			{ display: inline-block; }
+* html .clearfix	{ height: 1%; }
+.clearfix			{ display: block; }
+.clear				{ clear: both; }
+.floatR				{ float: right; }
+:focus				{ outline: 0; }
+.right				{ text-align: right; }
+.center				{ text-align: center; }
+.nowrap				{ white-space: nowrap; }
+
+body				{ font-family: Arial, Helvetica; font-size: 12px; background-color: #efefef; color: #333; }
+
+input.text, textarea	{ width: 300px; font-size: 13px; color: #333; font-family: Arial, Helvetica; border: 1px solid #999; padding: 3px; }
+textarea				{ height: 200px; }
+
+#loading			{ display: none; color: #fff; background-color: #cd0a0a; font-size: 0.833em; font-weight: bold; padding: 2px 0; text-align: center; width: 90px; position: absolute; left: 50%; margin-left: -45px; -moz-border-radius-topleft: 0px; -moz-border-radius-topright: 0px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; }
+
+.pageWrap			{ width: 800px; margin: 10px auto; background: #fff; padding: 20px; -moz-box-shadow: 5px 5px 10px #666;; -webkit-box-shadow: 5px 5px 10px #666; -moz-border-radius: 10px; border-radius: 10px; }
+.pageHeader			{ background: #00617f; color: #fff; font-size: 20px; padding: 10px 20px; }
+.pageContent		{ margin-top: 20px; }
+.pageFooter			{ color: #666; font-size: 11px; padding-top: 40px; }
+
+.navigation				{ font-size: 14px; background: #4db3d5; }
+.navigation ul			{ list-style: none; padding: 0; margin: 0; }
+.navigation li			{ float: left; }
+.navigation a			{ color: #fff; text-decoration: none; display: block; padding: 8px; margin: 5px 5px 0 5px; }
+.navigation a.active	{ background-color: #fff; color: #333; font-weight: bold; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 0px; -moz-border-radius-bottomleft: 0px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; }
+.navigation a.highlight	{ color: #f4fbab; }
+
+img 	{ border: 0; }
+p		{ padding: 0; margin: 1.0em 0; }
+h1		{ font-family: Arial, Helvetica; font-size: 20px; color: #333; font-weight: normal; }
+
+a		{ color: #4db3d5; text-decoration: none; }
+a:hover	{ text-decoration: underline; }
+
+a.button		{ background-color: #4db3d5; color: #fff; font-size: 10px; font-weight: bold; padding: 2px 6px; -moz-border-radius: 5px; -webkit-border-radius: 5px; margin-right: 10px; }
+a.button:hover	{ text-decoration: none; }
+
+label, .label	{ color: #666; font-size: 11px; padding-right: 50px; }
+.errormessage	{ font-size: 11px; font-weight: bold; color: #800000; margin-left: 5px; }
+.errorlabel		{ font-weight: bold; color: #800000; }
+
+.message	{ font-weight: bold; font-size: 11px; padding: 5px; margin-bottom: 5px; }
+.success	{ background-color: #F3FDF1; border-bottom: 1px solid #138800; color: #138800; }
+.error		{ background-color: #FDF5F1; border-bottom: 1px solid #CD0A0A; color: #CD0A0A; }
+.highlight	{ color: #CD0A0A; font-weight: bold; padding: 0 2px; }
+
+table								{ border: 0; border-collapse: collapse; min-width: 65%; }
+table.half							{ width: 50%; min-width: 50%; }
+table.full							{ width: 100%; }
+th									{ padding: 10px; color: #666; font-size: 11px; font-weight: normal; text-align: left; }
+td									{ padding: 10px; background-color: #fff; vertical-align: top; }
+tr.altRow td, tr.even td, li.altRow	{ background-color: #EFF5F7; }
+table.sortable .header 				{ background-repeat: no-repeat; background-position: center right; cursor: pointer; padding-right: 20px; white-space: nowrap; }
+table.sortable .headerSortUp		{ background-image: url(../img/icAsc.gif); }
+table.sortable .headerSortDown		{ background-image: url(../img/icDesc.gif); }
+table.sortable .headerSortDown, table.sortable .headerSortUp { font-weight: bold; }
+
+.pagination			{ width: 100%; border-collapse: collapse; }
+.pagination td		{ padding: 20px 0; color: #666; font-size: 11px; width: 50%; }
+.pagination .prev	{ margin: 0 10px; }
+.pagination .next	{ margin: 0 10px; }
+.pagination input	{ font-size: 10px; width: 50px; text-align: center; border: none; color: #666; }
+
+.status0	{ color: #d40000; font-size: 11px; font-weight: bold; }
+.status1	{ color: #009400; font-size: 11px; font-weight: bold; }
+.status2	{ color: #797979; font-size: 11px; font-weight: bold; }
+
+.documentPositions		{ position: absolute; width: 600px; margin: 5px 0 0 -200px; z-index: 10; display: none; text-align: left; background: #fff; border: 2px solid gray; padding: 20px; -moz-box-shadow: 5px 5px 10px #666;; -webkit-box-shadow: 5px 5px 10px #666; }
+.documentPositions ul	{ padding: 0; list-style: none; }
+.documentPositions ul li	{ padding: 8px; display: block; font-size: 11px; }
+.closePosInfo			{ position: absolute; top: 10px; right: 10px; font-weight: bold; }
+.dunningInfo			{ margin-left: -620px; }

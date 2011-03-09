@@ -1,0 +1,91 @@
+<?php
+
+/*
+ * gsFrontend
+ * Copyright (C) 2011 Gedankengut GbR Häuser & Sirin <support@gsales.de>
+ * 
+ * This file is part of gsFrontend.
+ * 
+ * gsFrontend is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * gsFrontend is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with gsFrontend. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+define('FE_DIR',dirname(realpath(__FILE__)));
+
+// Error reporting
+error_reporting(E_ALL ^ E_NOTICE);
+
+ini_set('display_errors','Off'); // Sollen dem Besucher Fehlermeldungen angezeigt werden?
+ini_set('log_errors', 'On'); // Sollen Fehlermeldungen in einer Datei geloggt werden?
+ini_set('error_log', FE_DIR.'/log/frontend.log'); // Datei in welche die Fehlermeldungen geloggt werden
+
+// g*Sales 2 API
+define('GSALES2_API_URL','http://www.meinedomain.de/meingsales2/api/api.php?wsdl'); // Adresse deiner g*Sales 2 API
+define('GSALES2_API_KEY','xxxxxxxxxxxxxxxxxxxx'); // Dein g*Sales 2 API Schlüssel
+
+// Frontend
+define('FRONTEND_SESSION_IDENT','x12kbt5fki9ptru'); // Hier einen eigenen zufälligen String eintragen
+define('FRONTEND_URL','http://www.meinedomain.de/meingsales2frontend'); // URL zum Kundenfrontend ohne Slash am Ende (z.B. http://www.meinedomain.de/meingsales2frontend)
+define('FRONTEND_TITLE','g*Sales Kundenfrontend'); // Titel des Kundenfrontends
+define('LINK_IMPRINT','http://<yourdomain>/impressum.html'); // URL zu deinem Impressum
+
+// Emailing
+define('MAIL_AUTH',true); // Benötigt der E-Mail SMTP Server eine Authentifizierung?
+define('MAIL_HOSTNAME','meinsmtpserver.de'); // Hostname des SMTP Servers
+define('MAIL_USERNAME','benutzer1@meinedomain.de'); // Benutzername für SMTP Authentifizierung
+define('MAIL_PASSWORD','xxxxxxxx'); // Passwort für SMTP Authentifizierung
+define('MAIL_TO','email@meinedomain.de'); // E-Mails vom Frontend (z.B. Kontaktformular) gehen an diese Adresse
+define('MAIL_FROM','noreply@meinedomain.de'); // Das Frontend versendet E-Mails mit dieser Absenderadresse
+define('MAIL_FROM_NAME','Max Mustermann'); // Das Frontend versendet E-Mails mit diesem Absendernamen
+
+// Payment
+define('PAYMENT_LOG',true); // Sollen Payment Notifications von Paypal & Sofortüberweisung geloggt werden?
+define('PAYMENT_LOGFILE',FE_DIR.'/log/payment.log'); // Logdatei für Payment Notfications
+
+// Payment provider: PayPal
+define('PAYPAL_ENABLE', true); // PayPal aktivieren
+define('PAYPAL_SANDBOX', false); // PayPal im Testmodus/Sandbox verwenden?
+define('PAYPAL_CURRENCY','EUR'); // g*Sales 2 Hauptwährung gem. PayPal Währungscode (https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/mc_wa-outside)
+define('PAYPAL_ACCOUNT','meinpaypalaccount@meinedomain.de'); // Dein PayPal Account
+define('PAYPAL_SANDBOX_ACCOUNT','seller_xxxxxxxxxx_biz@meinedomain.de'); // Dein PayPal Account für den Testmodus
+
+// PayPal Weiterleitungen (keine Änderungen nötig!)
+define('PAYPAL_CANCEL', FRONTEND_URL.'/invoice/payfailure/'); // URL zur "Bezahlung fehlgeschlagen" Seite
+define('PAYPAL_IPN', FRONTEND_URL.'/paypalipn/'); // URL zur "PayPal IPN" Seite (um Rechnungen automatisch auf bezahlt zu setzen)
+define('PAYPAL_SUCCESS', FRONTEND_URL.'/invoice/paysuccess/'); // URL zur "Bezahlung erfolgreich" Seite
+
+// Payment provider: sofortüberweisung.de
+define('SOFORTU_ENABLE',true); // sofortüberweisung.de aktivieren?
+define('SOFORTU_USERID',33915); // Deine Kundennummer
+define('SOFORTU_PROJECTID',101512); // Deine Projektnummer
+define('SOFORTU_PROJECTPASS','xxxxxxxxxxxxxxxxxxxx'); // Dein Projektpasswort (Muss auf sofortüberweisung.de im Kundenbereich gesetzt werden "Meine Projekte" > "Projekt anklicken" > "Erweiterte Einstellungen" > "Passwörter und Hash-Algorithmus" > "Projekt-Passwort setzen")
+
+/*
+
+Hinweise zur Verwendung von sofortüberweisung.de
+------------------------------------------------------
+Um sofortüberweisung.de als Zahlungsanbieter nutzen zu können benötigt man eine Kunden-Nr., eine Projekt-Nr., ein Projekt-Passwort (s.o.) und
+muss folgende Einstellungen vornehmen damit Rechnungen nach der Bezahlung automatisch auf bezahlt gesetzt werden.
+
+1) Input Prüfung aktivieren und Hash Algorithmus auf SHA1 stellen.
+"Meine Projekte" > "Projekt anklicken" > "Erweiterte Einstellungen" > "Passwörter und Hash-Algorithmus" > "Input-Prüfung"
+- Die Input-Prüfung muss aktiviert werden.
+- Der Hash-Algorithmus muss auf SHA1 gestellt werden.
+
+2) Benachrichtigungen eintragen
+"Meine Projekte" > "Projekt anklicken" > "Erweiterte Einstellungen" > "Benachrichtigungen" > "Neue Benachrichtigung anlegen" > "HTTP"
+- "aktiviert" anhaken
+- "Benachrichtigungs-URL:" auf http://www.meinedomain.de/meingsales2frontend/sofortpn stellen.
+- "Methode" auf POST stellen.
+
+*/
