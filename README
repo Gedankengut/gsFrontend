@@ -30,8 +30,11 @@
 
 2. Rename the file "/app/cfg.php.dist" to "/app/cfg.php"
 
-3. Configure your gsFrontend installation by editing "/app/inc.cfg.php"
+3. Configure your gsFrontend installation by editing "/app/cfg.php"
 
 4. Make sure your webserver can write to "/app/templates_c" (chmod 777 templates_c)
 
-5. Finished
+5. To enable logging make sure your webserver can write to the files in "/app/log" (chmod 777 frontend.log payment.log)
+   Please make sure that these logfiles are proper protected and not accessible. See .htaccess file in /app/log directory.
+
+6. Finished
