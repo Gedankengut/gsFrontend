@@ -40,6 +40,7 @@ class GSALES_DATA_REFUND extends GSALES_DATA{
 		$arrSort = array('field'=>'created', 'direction'=>'desc');
 		$arrResult = $this->objSoapClient->getRefunds($this->strAPIKey, $arrFilter, $arrSort, 999, 0);
 		if ($arrResult['status']->code != 0) throw new Exception($arrResult['status']->message,$arrResult['status']->code);
+		$objRefunds = array();
 		foreach ((array)$arrResult['result'] as $key => $refund) $objRefunds[] = new GSALES2_OBJECT_REFUND($refund);
 		return $objRefunds;
 	}

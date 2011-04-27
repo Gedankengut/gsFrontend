@@ -42,7 +42,7 @@ class FRONTEND_CONTROLLER_MYDATA extends FRONTEND_CONTROLLER {
 		
 		$objForm = new HTMLFORM($this,'mydataedit'); // form for customer data edit
 		$objForm->setAction('mydata/edit');
-		$objForm->addField('Firma',  'input', 'company',  $objCustomer->getCompany(),  true, '', '', '');
+		$objForm->addField('Firma',  'input', 'company',  $objCustomer->getCompany(),  false, '', '', '');
 		$objForm->addField('Vorname',  'input', 'firstname',  $objCustomer->getFirstname(),  true, '', '', '');
 		$objForm->addField('Nachname',  'input', 'lastname',  $objCustomer->getLastname(),  true, '', '', '');
 		$objForm->addField('Anschrift',  'input', 'address',  $objCustomer->getAddress(),  true, '', '', '');

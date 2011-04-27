@@ -40,6 +40,7 @@ class GSALES_DATA_INVOICE extends GSALES_DATA{
 		$arrSort = array('field'=>'created', 'direction'=>'desc');
 		$arrResult = $this->objSoapClient->getInvoices($this->strAPIKey, $arrFilter, $arrSort, 999, 0);
 		if ($arrResult['status']->code != 0) throw new Exception($arrResult['status']->message,$arrResult['status']->code);
+		$objInvoices = array();
 		foreach ((array)$arrResult['result'] as $key => $invoice) $objInvoices[] = new GSALES2_OBJECT_INVOICE($invoice);
 		return $objInvoices;
 	}

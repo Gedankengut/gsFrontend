@@ -32,6 +32,7 @@ class GSALES_DATA_CONTRACT extends GSALES_DATA{
 		$arrSort = array('field'=>'created', 'direction'=>'desc');
 		$arrResult = $this->objSoapClient->getContracts($this->strAPIKey, $arrFilter, $arrSort, 999, 0);
 		if ($arrResult['status']->code != 0) throw new Exception($arrResult['status']->message,$arrResult['status']->code);
+		$objMultiPos = array();
 		foreach ((array)$arrResult['result'] as $key => $contract) {
 			$objContract = new GSALES2_OBJECT_CONTRACT($contract);
 			foreach ((array)$objContract->getPositions() as $key => $objPos){

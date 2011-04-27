@@ -162,7 +162,7 @@ class FRONTEND_CONTROLLER {
 		
 		if (method_exists($this, $strMethodToCall)){
 			
-			call_user_method($strMethodToCall,$this);	
+			call_user_func(array($this, $strMethodToCall));
 			
 			if ($this->booSmartyOutput){
 				if ($this->objUserAuth->isAuthorized()) $this->objSmarty->assign('userdetails',$this->objSession->get('userdetails'));

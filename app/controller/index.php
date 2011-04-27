@@ -49,7 +49,7 @@ class FRONTEND_CONTROLLER_INDEX extends FRONTEND_CONTROLLER {
 				    	else $this->setMessage('Die Kundennummer ist nicht eindeutig, bitte über die E-Mail Adresse einloggen.', 'error');	
 				        break;
 				    case -2:
-				        $this->setMessage('Kudenkonto konnte nicht gefunden werden.', 'error');
+				        $this->setMessage('Kundenkonto konnte nicht gefunden werden.', 'error');
 				        break;
 				    case -3:
 				        $this->setMessage('Ein Login mit diesem Kundenkonto ist derzeit nicht möglich.', 'error');
