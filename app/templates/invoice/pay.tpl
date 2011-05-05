@@ -49,9 +49,9 @@
 {if $payment_paypal || $payment_sofort}
 	<p><br /><strong>Bitte wählen Sie eine Zahlungsart:</strong></p>
 	<p>
-		{if $payment_paypal}<a href="{felink controller="invoice" action="paypaypal"}/{$invoice->getId()}"><img src="{$fepath}/public/img/paymentPayPal.gif" alt="PayPal" /></a>{/if}
+		{if $payment_paypal}<a href="{felink controller="invoice" action="paypaypal"}/{$invoice->getId()}"><img src="{$fepath}public/img/paymentPayPal.gif" alt="PayPal" /></a>{/if}
 		{if $payment_paypal && $payment_sofort}&nbsp;&nbsp;{/if}
-		{if $payment_sofort}<a href="{felink controller="invoice" action="paysofort"}/{$invoice->getId()}"><img src="{$fepath}/public/img/paymentSofort.gif" alt="sofortueberweisung.de" /></a>{/if}
+		{if $payment_sofort}<a href="{felink controller="invoice" action="paysofort"}/{$invoice->getId()}"><img src="{$fepath}public/img/paymentSofort.gif" alt="sofortueberweisung.de" /></a>{/if}
 	</p>
 	{if $payment_sofort}
 		<p>
