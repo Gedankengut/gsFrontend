@@ -40,6 +40,7 @@ define('FRONTEND_TITLE','g*Sales Kundenfrontend'); // Titel des Kundenfrontends
 define('LINK_IMPRINT','http://<yourdomain>/impressum.html'); // URL zu deinem Impressum
 
 // Emailing
+define('MAIL_TYPE', 'smtp'); // möglich sind smtp, phpmail, qmail, sendmail
 define('MAIL_AUTH',true); // Benötigt der E-Mail SMTP Server eine Authentifizierung?
 define('MAIL_HOSTNAME','meinsmtpserver.de'); // Hostname des SMTP Servers
 define('MAIL_USERNAME','benutzer1@meinedomain.de'); // Benutzername für SMTP Authentifizierung

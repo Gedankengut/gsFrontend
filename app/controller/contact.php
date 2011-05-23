@@ -43,13 +43,18 @@ class FRONTEND_CONTROLLER_CONTACT extends FRONTEND_CONTROLLER {
 			$objMailer = new FRONTEND_MAILER();
 			$objMailer->FromName =  trim($objCustomer->getFirstname() . ' ' . $objCustomer->getLastname());
 			$objMailer->From = $objCustomer->getEmail();
+			$objMailer->AddReplyTo($objCustomer->getEmail(), trim($objCustomer->getFirstname() . ' ' . $objCustomer->getLastname()));
 			$objMailer->Subject = 'Kundenfrontend "'.$_POST['subject'].'"';
 			$objMailer->Body = $_POST['message'];
 			$objMailer->AddAddress(MAIL_TO);
-			$objMailer->Send();
+			$booCheck = $objMailer->Send();
 			
-			$this->setMessage('Nachricht wurde erfolgreich verschickt');
-			$this->redirectTo('contact','index');
+			if ($booCheck){
+				$this->setMessage('Nachricht wurde erfolgreich verschickt');
+				$this->redirectTo('contact','index');
+			} else {
+				$this->setMessage($objMailer->ErrorInfo,'error');
+			}
 			
 		}
 		

@@ -20,14 +20,18 @@
  * along with gsFrontend. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(FE_DIR.'/lib/phpmailer/phpmailer.inc.php');
+require_once(FE_DIR.'/lib/PHPMailer_v5.1/class.phpmailer.php');
 
 class FRONTEND_MAILER extends PHPMailer{
 
 	public function __construct(){
 		
-		$this->IsHTML(false);
 		$this->IsSMTP();
+		if (MAIL_TYPE == 'phpmail') $this->IsMail();
+		if (MAIL_TYPE == 'qmail') $this->IsQmail();
+		if (MAIL_TYPE == 'sendmail') $this->IsSendmail();
+		
+		$this->IsHTML(false);
 		$this->SMTPAuth   = MAIL_AUTH;
 		$this->CharSet    = 'UTF-8';
 		$this->Host       = MAIL_HOSTNAME;
