@@ -107,8 +107,10 @@ class FRONTEND_CONTROLLER {
 
 	public function detectOwnPath(){
 		$strScriptPath = $_SERVER['SCRIPT_NAME'];
-		$strScriptPath = substr($strScriptPath,0,strlen($strScriptPath)-strlen('index.php'));
-		return $strScriptPath;
+		$arrParts = explode('/', $strScriptPath);
+		unset($arrParts[count($arrParts)-1]);
+		foreach ((array)$arrParts as $key => $value) $strReturn .= $value.'/';
+		return $strReturn;
 	}
 	
 	public function setUserRequest($arrUserRequest){
