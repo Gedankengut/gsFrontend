@@ -253,8 +253,12 @@ class GSALES2_OBJECT_INVOICE_POS extends GSALES2_OBJECT {
 	}
 	
 	public function getTax(){
-		return $this->tax;	
+		return floatval($this->tax);
 	}
+	
+	public function getFormatedTax(){
+		return number_format($this->getTax(),1,',','.') .'%';
+	}	
 	
 }
 

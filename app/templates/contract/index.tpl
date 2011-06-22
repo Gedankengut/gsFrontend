@@ -37,7 +37,7 @@
 		    	<td class="center">{$i->getQuantity()} {$i->getUnit()}</td>
 		    	<td>{$i->getPosText()|nl2br}</td>
 		    	<td class="right">{$i->getFormatedRoundedPriceWithSymbol()}</td>
-		    	<td class="right">{$i->getTax()|number_format:'':",":"."}%</td>
+		    	<td class="right">{$i->getFormatedTax()}</td>
 		    	<td class="center">{$i->getBilledUntil()|date_format:"%d.%m.%Y"}</td>
 		    	<td class="center">{$i->getDueDate()|date_format:"%d.%m.%Y"}</td>
 			</tr>
