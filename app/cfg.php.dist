@@ -20,6 +20,8 @@
  * along with gsFrontend. If not, see <http://www.gnu.org/licenses/>.
  */
 
+date_default_timezone_set('Europe/Berlin');
+
 define('FE_DIR',dirname(realpath(__FILE__)));
 
 // Error reporting
