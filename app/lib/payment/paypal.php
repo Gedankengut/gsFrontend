@@ -64,7 +64,7 @@ class PAYPAL
 		$this->add('no_note','1'); // display comment
 		$this->add('no_shipping','1'); // display shipping address
 		$this->add('edit_quantity',''); // -> 'no'
-		$this->add('tax','');		
+		$this->add('tax','0');		
 		$this->add('return',$this->strSuccessPage);
 		$this->add('cancel_return',$this->strCancelPage);
 		$this->add('notify_url',$this->strIPNPage);
