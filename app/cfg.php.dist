@@ -32,8 +32,8 @@ ini_set('log_errors', 'On'); // Sollen Fehlermeldungen in einer Datei geloggt we
 ini_set('error_log', FE_DIR.'/log/frontend.log'); // Datei in welche die Fehlermeldungen geloggt werden
 
 // g*Sales 2 API
-define('GSALES2_API_URL','http://www.meinedomain.de/meingsales2/api/api.php?wsdl'); // Adresse deiner g*Sales 2 API
-define('GSALES2_API_KEY','xxxxxxxxxxxxxxxxxxxx'); // Dein g*Sales 2 API Schlüssel
+define('GSALES2_API_URL','http://www.meinedomain.de/meingsales2/api/api.php?wsdl'); // g*Sales 2 API Adresse (steht in deiner g*Sales Konfiguration über dem API Schlüssel)
+define('GSALES2_API_KEY','xxxxxxxxxxxxxxxxxxxx'); // g*Sales 2 API Schlüssel
 
 // Frontend
 define('FRONTEND_SESSION_IDENT','x12kbt5fki9ptru'); // Hier einen eigenen zufälligen String eintragen
@@ -69,8 +69,8 @@ define('PAYPAL_SUCCESS', FRONTEND_URL.'/invoice/paysuccess/'); // URL zur "Bezah
 
 // Payment provider: sofortüberweisung.de
 define('SOFORTU_ENABLE',true); // sofortüberweisung.de aktivieren?
-define('SOFORTU_USERID',33915); // Deine Kundennummer
-define('SOFORTU_PROJECTID',101512); // Deine Projektnummer
+define('SOFORTU_USERID',99999); // Deine Kundennummer
+define('SOFORTU_PROJECTID',999999); // Deine Projektnummer
 define('SOFORTU_PROJECTPASS','xxxxxxxxxxxxxxxxxxxx'); // Dein Projektpasswort (Muss auf sofortüberweisung.de im Kundenbereich gesetzt werden "Meine Projekte" > "Projekt anklicken" > "Erweiterte Einstellungen" > "Passwörter und Hash-Algorithmus" > "Projekt-Passwort setzen")
 
 /*
