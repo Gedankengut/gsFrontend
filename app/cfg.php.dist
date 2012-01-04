@@ -68,9 +68,9 @@ define('PAYPAL_IPN', FRONTEND_URL.'/paypalipn/'); // URL zur "PayPal IPN" Seite 
 define('PAYPAL_SUCCESS', FRONTEND_URL.'/invoice/paysuccess/'); // URL zur "Bezahlung erfolgreich" Seite
 
 // Payment provider: sofortüberweisung.de
-define('SOFORTU_ENABLE',true); // sofortüberweisung.de aktivieren?
-define('SOFORTU_USERID',99999); // Deine Kundennummer
-define('SOFORTU_PROJECTID',999999); // Deine Projektnummer
+define('SOFORTU_ENABLE',false); // sofortüberweisung.de aktivieren?
+define('SOFORTU_USERID',33915); // Deine Kundennummer
+define('SOFORTU_PROJECTID',101512); // Deine Projektnummer
 define('SOFORTU_PROJECTPASS','xxxxxxxxxxxxxxxxxxxx'); // Dein Projektpasswort (Muss auf sofortüberweisung.de im Kundenbereich gesetzt werden "Meine Projekte" > "Projekt anklicken" > "Erweiterte Einstellungen" > "Passwörter und Hash-Algorithmus" > "Projekt-Passwort setzen")
 
 /*
