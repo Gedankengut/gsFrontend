@@ -89,7 +89,7 @@ class FRONTEND_CONTROLLER_MYDATA extends FRONTEND_CONTROLLER {
 		$objForm->setConfirmField('password1', 'password2');
 		$objForm->addField('Neues Passwort',  'password', 'password1',  '',  true, 'password', '', '');
 		$objForm->addField('Neues Passwort bestätigen',  'password', 'password2',  '',  true, '', '', '');
-		$objForm->addSubmitButton('Passwört ändern');
+		$objForm->addSubmitButton('Passwort ändern');
 		$objForm->output();
 		
 		if ($objForm->isSubmittedAndValid()){
