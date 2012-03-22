@@ -157,7 +157,7 @@ class FRONTEND_CONTROLLER_INVOICE extends FRONTEND_CONTROLLER {
 		}
 		
 		// sofortu is disabled
-		if (false == PAYPAL_ENABLE){
+		if (false == SOFORTU_ENABLE){
 			$this->setMessage('Die Bezahlung über sofortüberweisung.de ist momentan nicht möglich', 'error');
 			$this->redirectTo('invoice','pay',$arrUserRequest['params']['0']);
 			return;
