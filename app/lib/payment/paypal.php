@@ -33,28 +33,31 @@ class PAYPAL
 	var $strPaypalUrl;
 	var $strPaypalPostback;
 	var $intPaypalPostbackPort;
-	
+	var $strPaypalHost;
+
 	// frontend stuff
 	var $strSuccessPage;
 	var $strCancelPage;
 	var $strIPNPage;
-	
+
 	function __construct(){
 
 		$booSandbox = PAYPAL_SANDBOX;
-		
+
 		if ($booSandbox == true){
 			$this->strPaypalAccount = PAYPAL_SANDBOX_ACCOUNT;
 			$this->strPaypalUrl = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 			$this->strPaypalPostback = 'ssl://www.sandbox.paypal.com';
+			$this->strPaypalHost = 'www.sandbox.paypal.com';
 		} else {
 			$this->strPaypalAccount = PAYPAL_ACCOUNT;
 			$this->strPaypalUrl = 'https://www.paypal.com/cgi-bin/webscr';
 			$this->strPaypalPostback = 'ssl://www.paypal.com';
+			$this->strPaypalHost = 'www.paypal.com';
 		}
-		
+
 		$this->intPaypalPostbackPort = '443';
-		
+
 		$this->strSuccessPage = PAYPAL_SUCCESS;
 		$this->strCancelPage = PAYPAL_CANCEL;
 		$this->strIPNPage = PAYPAL_IPN;
@@ -64,7 +67,7 @@ class PAYPAL
 		$this->add('no_note','1'); // display comment
 		$this->add('no_shipping','1'); // display shipping address
 		$this->add('edit_quantity',''); // -> 'no'
-		$this->add('tax','0');		
+		$this->add('tax','0');
 		$this->add('return',$this->strSuccessPage);
 		$this->add('cancel_return',$this->strCancelPage);
 		$this->add('notify_url',$this->strIPNPage);
@@ -77,55 +80,57 @@ class PAYPAL
 			$this->enableLogging();
 			$this->setLogFile(PAYMENT_LOGFILE);
 		}
-		
+
 	}
-	
+
 	function setLogFile($strAbsolutPathToFile){
 		$this->strLogfile = $strAbsolutPathToFile;
 	}
-	
+
 	function enableLogging(){
 		$this->booLogEvents = true;
 	}
-	
+
 	function add($strKey,$strValue){
 		$this->arrForm[$strKey]=$strValue;
-	}	
-	
+	}
+
 	function startProcess(){
-		?> 
+		?>
 		<html>
 			<head><title>PayPal Bezahlung wird eingeleitet ...</title></head>
 			<body onLoad="document.paypal_form.submit();">
 				<form method="post" name="paypal_form" action="<?php echo $this->strPaypalUrl; ?>">
-				<?php foreach ((array)$this->arrForm as $key => $value) echo '<input type="hidden" name="'.$key.'" value="'.$value.'">'; ?> 
-				<center><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="333333">PayPal Bezahlung wird eingeleitet ...</font></center>
+				<?php foreach ((array)$this->arrForm as $key => $value) echo '<input type="hidden" name="'.$key.'" value="'.$value.'">'; ?>
+					<p style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif; color: #333333">PayPal Bezahlung wird eingeleitet ...</p>
 				</form>
-			</body>   
-		</html>			
+			</body>
+		</html>
 		<?php
 	}
 
 	function checkAndvalidateIPN(){
-		
+
 		$debug = true;
-	
+
 		if ($debug) $f = fopen($this->strLogfile,'a+');
-		
+
 		if ($debug) fwrite($f,'PAYPAL IPN'."\n");
 		if ($debug) fwrite($f,'POST: '.print_r($_POST,true)."\n");
-	
+
 		// read the post from PayPal system and add 'cmd'
 		$req = 'cmd=_notify-validate';
 		foreach ($_POST as $key => $value) {
 			$value = urlencode(stripslashes($value));
 			$req .= "&$key=$value";
 		}
-	
+
 		// post back to PayPal system to validate
-		$header = "POST /cgi-bin/webscr HTTP/1.0\r\n";
+		$header = "POST /cgi-bin/webscr HTTP/1.1\r\n";
 		$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
 		$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
+		$header .= "Host: ".$this->strPaypalHost."\r\n";
+
 		$fp = fsockopen ($this->strPaypalPostback, $this->intPaypalPostbackPort, $errno, $errstr, 30);
 		
 		$pstatus = $_POST['payment_status'];
