@@ -31,14 +31,14 @@ ini_set('display_errors','Off'); // Sollen dem Besucher Fehlermeldungen angezeig
 ini_set('log_errors', 'On'); // Sollen Fehlermeldungen in einer Datei geloggt werden?
 ini_set('error_log', FE_DIR.'/log/frontend.log'); // Datei in welche die Fehlermeldungen geloggt werden
 
-// g*Sales 2 API
-define('GSALES2_API_URL','http://www.meinedomain.de/meingsales2/api/api.php?wsdl'); // g*Sales 2 API Adresse (steht in deiner g*Sales Konfiguration über dem API Schlüssel)
-define('GSALES2_API_KEY','xxxxxxxxxxxxxxxxxxxx'); // g*Sales 2 API Schlüssel
+// gSales 2 API
+define('GSALES2_API_URL','http://www.meinedomain.de/meingsales2/api/api.php?wsdl'); // gSales 2 API Adresse (steht in deiner g*Sales Konfiguration über dem API Schlüssel)
+define('GSALES2_API_KEY','xxxxxxxxxxxxxxxxxxxx'); // gSales 2 API Schlüssel
 
 // Frontend
 define('FRONTEND_SESSION_IDENT','x12kbt5fki9ptru'); // Hier einen eigenen zufälligen String eintragen
 define('FRONTEND_URL','http://www.meinedomain.de/meingsales2frontend'); // URL zum Kundenfrontend ohne Slash am Ende (z.B. http://www.meinedomain.de/meingsales2frontend)
-define('FRONTEND_TITLE','g*Sales Kundenfrontend'); // Titel des Kundenfrontends
+define('FRONTEND_TITLE','gSales Kundenfrontend'); // Titel des Kundenfrontends
 define('LINK_IMPRINT','http://<yourdomain>/impressum.html'); // URL zu deinem Impressum
 
 // Emailing
@@ -58,7 +58,7 @@ define('PAYMENT_LOGFILE',FE_DIR.'/log/payment.log'); // Logdatei für Payment No
 // Payment provider: PayPal
 define('PAYPAL_ENABLE', true); // PayPal aktivieren
 define('PAYPAL_SANDBOX', false); // PayPal im Testmodus/Sandbox verwenden?
-define('PAYPAL_CURRENCY','EUR'); // g*Sales 2 Hauptwährung gem. PayPal Währungscode (https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/mc_wa-outside)
+define('PAYPAL_CURRENCY','EUR'); // gSales 2 Hauptwährung gem. PayPal Währungscode (https://www.paypal.com/cgi-bin/webscr?cmd=p/sell/mc/mc_wa-outside)
 define('PAYPAL_ACCOUNT','meinpaypalaccount@meinedomain.de'); // Dein PayPal Account
 define('PAYPAL_SANDBOX_ACCOUNT','seller_xxxxxxxxxx_biz@meinedomain.de'); // Dein PayPal Account für den Testmodus
 

@@ -60,7 +60,7 @@
 			{include file="$template"}
 		</div>
 		<div class="pageFooter clearfix">
-			Diese Seite basiert auf dem <a href="http://www.gsales.de" target="_blank">g*Sales</a> Kundenfrontend. <a href="{$smarty.const.LINK_IMPRINT}" target="_blank" class="floatR">Impressum</a>
+			Diese Seite basiert auf dem <a href="http://www.gsales.de" target="_blank">gSales</a> Kundenfrontend. <a href="{$smarty.const.LINK_IMPRINT}" target="_blank" class="floatR">Impressum</a>
 		</div>
 	</div>
 </body>
