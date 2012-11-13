@@ -39,7 +39,7 @@ class GSALES_DATA_CUSTOMER extends GSALES_DATA{
 		if ($arrResult['status']->code != 0) throw new Exception($arrResult['status']->message,$arrResult['status']->code);
 		return $arrResult['result'];
 	}
-	
+
 	public function passwordLostStep1($strCustomerNoOrEmail){
 		$arrResult = $this->objSoapClient->customerFrontendPasswordLost($this->strAPIKey, $strCustomerNoOrEmail);
 		if ($arrResult['status']->code != 0) throw new Exception($arrResult['status']->message, $arrResult['status']->code);
@@ -47,7 +47,7 @@ class GSALES_DATA_CUSTOMER extends GSALES_DATA{
 	}
 	
 	public function updateCustomerProposal($intId, $arrData){
-		foreach ((array)$arrData as $key => $value) $arrData[$key] = utf8_encode($value);
+		foreach ((array)$arrData as $key => $value) $arrData[$key] = $value;
 		$arrResult = $this->objSoapClient->updateCustomerProposal($this->strAPIKey, $intId, $arrData);
 		if ($arrResult['status']->code != 0) throw new Exception($arrResult['status']->message,$arrResult['status']->code);
 		return new GSALES2_OBJECT_CUSTOMER($arrResult['result']);
