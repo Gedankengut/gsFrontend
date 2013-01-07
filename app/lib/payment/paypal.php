@@ -31,9 +31,6 @@ class PAYPAL
 	// paypal settings
 	var $strPaypalAccount;
 	var $strPaypalUrl;
-	var $strPaypalPostback;
-	var $intPaypalPostbackPort;
-	var $strPaypalHost;
 
 	// frontend stuff
 	var $strSuccessPage;
@@ -47,16 +44,10 @@ class PAYPAL
 		if ($booSandbox == true){
 			$this->strPaypalAccount = PAYPAL_SANDBOX_ACCOUNT;
 			$this->strPaypalUrl = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-			$this->strPaypalPostback = 'ssl://www.sandbox.paypal.com';
-			$this->strPaypalHost = 'www.sandbox.paypal.com';
 		} else {
 			$this->strPaypalAccount = PAYPAL_ACCOUNT;
 			$this->strPaypalUrl = 'https://www.paypal.com/cgi-bin/webscr';
-			$this->strPaypalPostback = 'ssl://www.paypal.com';
-			$this->strPaypalHost = 'www.paypal.com';
 		}
-
-		$this->intPaypalPostbackPort = '443';
 
 		$this->strSuccessPage = PAYPAL_SUCCESS;
 		$this->strCancelPage = PAYPAL_CANCEL;
@@ -111,70 +102,62 @@ class PAYPAL
 
 	function checkAndvalidateIPN(){
 
-		$debug = true;
-
-		if ($debug) $f = fopen($this->strLogfile,'a+');
-
-		if ($debug) fwrite($f,'PAYPAL IPN'."\n");
-		if ($debug) fwrite($f,'POST: '.print_r($_POST,true)."\n");
-
-		// read the post from PayPal system and add 'cmd'
-		$req = 'cmd=_notify-validate';
-		foreach ($_POST as $key => $value) {
-			$value = urlencode(stripslashes($value));
-			$req .= "&$key=$value";
+		if ($this->booLogEvents){
+			ini_set('log_errors', true);
+			ini_set('error_log', $this->strLogfile);
 		}
 
-		// post back to PayPal system to validate
-		$header = "POST /cgi-bin/webscr HTTP/1.1\r\n";
-		$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-		$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-		$header .= "Host: ".$this->strPaypalHost."\r\n";
+		include('PHP-PayPal-IPN/ipnlistener.php');
 
-		$fp = fsockopen ($this->strPaypalPostback, $this->intPaypalPostbackPort, $errno, $errstr, 30);
-		
-		$pstatus = $_POST['payment_status'];
-			
-		if (!$fp) {
-			if ($debug) fwrite($f,'paypal connection fsockopen failed'."\n");
-			return false;
-		} else {
-			fputs ($fp, $header . $req);
-			// read the body data 
-			$res = '';
-			$headerdone = false;
-			while (!feof($fp)) {
-				$line = fgets ($fp, 1024);
-				if (strcmp($line, "\r\n") == 0) {
-					$headerdone = true; // read the header
-				} else if ($headerdone) {
-					$res .= $line; // header has been read. now read the contents
-				}
-			}
-			fclose ($fp);	
-			// parse the data
-			$lines = explode("\n", $res);
-			if (strcmp ($lines[0], "VERIFIED") == 0) {
-				if ($debug) fwrite($f,'paypal request verified'."\n");
-					if ($pstatus == 'Completed'){
-						if ($debug) fwrite($f,'paypal payment completed'."\n");
-						
-						// process payment
-						$objPayment = new GSALES2_OBJECT_PAYMENT();
-							$objPayment->setPaymentProvider('paypal');
-							$objPayment->setAmount($_POST['mc_gross']);
-							$objPayment->setInvoiceId($_POST['custom']);
-							$objPayment->setTransactionId($_POST['txn_id']);
-						if ($debug) fwrite($f,'Payment Object: '.print_r($objPayment,true)."\n");
-						
-						// set invoice to paid
-						return $objPayment->checkPaidAmountAndSetInvoiceAsPaid();
-					}
-			} else {
+		$listener = new IpnListener();
+		$listener->use_sandbox = PAYPAL_SANDBOX;
+		$listener->use_ssl = true;
+
+		$listener->use_curl = false;
+		if (function_exists('curl_init')) $listener->use_curl = true;
+
+		try {
+			$listener->requirePostMethod();
+			$verified = $listener->processIpn();
+		} catch (Exception $e) {
+			error_log($e->getMessage());
+			exit(0);
+		}
+
+		if ($this->booLogEvents) error_log($listener->getTextReport());
+
+		if ($verified) {
+
+			if ($_POST['payment_status'] != 'Completed'){
+				if ($this->booLogEvents) error_log('FAIL - payment_status is not Completed');
 				return false;
 			}
+
+			if ($_POST['receiver_email'] != $this->strPaypalAccount){
+				if ($this->booLogEvents) error_log('FAIL - receiver_email is: '.$_POST['receiver_email'].' expected: '.$this->strPaypalAccount);
+				return false;
+			}
+
+			if ($_POST['mc_currency'] != PAYPAL_CURRENCY){
+				if ($this->booLogEvents) error_log('FAIL - currency is: '.$_POST['mc_currency'].' expected: '.PAYPAL_CURRENCY);
+				return false;
+			}
+
+			// process payment
+			$objPayment = new GSALES2_OBJECT_PAYMENT();
+			$objPayment->setPaymentProvider('paypal');
+			$objPayment->setAmount($_POST['mc_gross']);
+			$objPayment->setInvoiceId($_POST['custom']);
+			$objPayment->setTransactionId($_POST['txn_id']);
+			if ($this->booLogEvents) error_log('Payment object:'.print_r($objPayment,true));
+
+			// set invoice to paid
+			return $objPayment->checkPaidAmountAndSetInvoiceAsPaid();
+
+		} else {
+			if ($this->booLogEvents) error_log('!!! Invalid IPN !!! ');
 		}
-		
+
 	}
 
 }
