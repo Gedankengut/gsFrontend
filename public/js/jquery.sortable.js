@@ -859,7 +859,8 @@
                 return /^[-+]?\d*$/.test($.trim(s.replace(/[,.']/g, '')));
             };
             this.clearTableBody = function (table) {
-                if ($.browser.msie) {
+                // Fix: IE11 detection problem
+                if ($.browser.msie || (!!navigator.userAgent.match(/Trident\/7\./))) {
                     function empty() {
                         while (this.firstChild)
                         this.removeChild(this.firstChild);
